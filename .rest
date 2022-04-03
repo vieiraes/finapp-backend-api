@@ -1,0 +1,33 @@
+GET http://localhost:3000/
+
+
+### 
+GET http://localhost:3000/cursos?page=2&limit=2
+
+body {}
+
+###
+POST http://localhost:3000/cursos HTTP/1.1
+content-type: application/json
+
+ {
+  "nome": "Curso de NodeJS",
+  "descricao": "Curso de NodeJS",
+  "cargaHoraria": "40",
+  "publicoAlvo": "Estudante",
+  "nivel": "Intermediário",
+  "local": "São Paulo",
+  "dataInicio": "2019-01-01",
+  "dataTermino": "2019-01-01",
+  "valor": "100.00"
+}
+
+###
+PATCH  http://localhost:3000/cursos/1
+
+###
+DELETE  http://localhost:3000/cursos/1
+
+
+###
+PUT  http://localhost:3000/cursos/1123123
