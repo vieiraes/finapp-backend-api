@@ -22,9 +22,16 @@ const customersDB = [];
 //     name,
 //     cpf,
 //     created_at: new Date(),
-//     statements: statementsDB,
 //     balance: getBalance(statementsDB)
+//     statements: []
 // }
+
+const walletsDB = [];
+// {    
+//     accountId: accountId,
+
+
+
 
 
 const statementsDB = [];
@@ -34,11 +41,6 @@ const statementsDB = [];
 //     created_at: new Date(),
 //     transactionType: [],
 // }
-
-const walletsDB = [];
-
-
-
 
 function verifyIfExistsAccountCPFInParams(request, response, next) {
     const { cpf } = request.params;
@@ -92,6 +94,7 @@ app.post("/account", (request, response) => {
         wallet: walletCode,
         created_at: new Date(),
         balance: 0
+        
     };
 
 
