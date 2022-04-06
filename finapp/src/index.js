@@ -94,7 +94,7 @@ app.post("/account", (request, response) => {
         wallet: walletCode,
         created_at: new Date(),
         balance: 0
-        
+
     };
 
 
@@ -126,7 +126,7 @@ app.post("/account", (request, response) => {
 });
 
 
-
+//# TODO: LISTAR TODA WALLETS ( WALLETS AINDA NAO IMPLEMENTADAS)
 // app.get("/wallets", (request, response) => {
 
 
@@ -153,7 +153,7 @@ app.post("/account", (request, response) => {
 
 
 
-//LISTANDO TODAS AS CONTAS
+
 app.get("/accounts", (request, response) => {
     const { customer } = request;
 
@@ -191,9 +191,6 @@ app.get("/accounts", (request, response) => {
 
 
 
-
-
-//LISTANDO STATEMENTS DE UMA CONTA
 app.get("/statements/:cpf", verifyIfExistsAccountCPFInParams, (request, response) => {
 
 
@@ -206,6 +203,43 @@ app.get("/statements/:cpf", verifyIfExistsAccountCPFInParams, (request, response
         statements: customer.statements.sort((a, b) => b.created_at - a.created_at)
     });
 });
+
+
+
+
+
+
+
+
+//#TODO: fazer essa bagaça complicada
+app.get("/statements/byDates/:cpf", verifyIfExistsAccountCPFInParams, (request, response) => {
+    const { customer } = request;
+    const { initialDate, endDate } = request.params;
+
+
+    const initialDateFomated = new Date(initialDate);
+    const endDateFormated = new Date(endDate);
+
+
+
+    const statementsFiltered = customer.statements.filter(
+        statement => statement.created_at >= initialDateFomated && statement.created_at <= endDateFormated
+    );
+
+
+
+
+
+    return response.status(200).json({
+        message: "all stetements listed",
+        statementDate: [statementsFiltered]
+
+
+
+
+
+    });
+})
 
 
 
