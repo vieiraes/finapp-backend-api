@@ -5,13 +5,15 @@
   "license": "MIT",
   "author": {
     "name": "Bruno Vieira",
-    "email": "vieira.es@gmail.com"},
-  "type":"commonjs",
+    "email": "vieira.es@gmail.com"
+  },
+  "type": "commonjs",
   "scripts": {
     "dev": "nodemon finapp/src/index.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
+    "crypto": "^1.0.1",
     "express": "^4.17.3",
     "express-async-errors": "^3.1.1",
     "uuid": "^8.3.2"
