@@ -1,6 +1,7 @@
 const express = require('express');
 const { v4: uuidv4 } = require('uuid');
 const crypto = require('crypto');
+const { stringify } = require('querystring');
 
 
 
@@ -126,30 +127,86 @@ app.post("/account", (request, response) => {
 });
 
 
-//# TODO: LISTAR TODA WALLETS ( WALLETS AINDA NAO IMPLEMENTADAS)
-// app.get("/wallets", (request, response) => {
+
+app.put("/account/:cpf", verifyIfExistsAccountCPFInParams, (request, response) => {
+    const { customer } = request;
+    const { cpf } = request.params;
+    const { name } = request.body;
+
+    const customerfindByCPF = customersDB.find(customer => customer.cpf === cpf);
+    customerfindByCPF.name = name;
+
+    const objeto = {
+        accountId: customerfindByCPF.accountId,
+        name: customerfindByCPF.name,
+        cpf: customerfindByCPF.cpf,
+        wallet: customerfindByCPF.wallet,
+        created_at: customerfindByCPF.created_at,
+        balance: customerfindByCPF.balance,
+
+    };
+
+
+    return response.status(200).json({
+        message: "Account updated",
+        name: objeto.name,
+        accountId: objeto.accountId,
+        wallet: objeto.wallet,
+        cpf: objeto.cpf,
+        created_at: objeto.created_at,
+    });
+});
+
+
+//#TODO: melhorar.. ainda nao existe registro no WalletsDB, a ideia é começar a criar um push 
+//pra dentro do walletsDB
+app.get("/wallets", (request, response) => {
+    
+    const { account } = request;
+
+
+    const customerWallet = customersDB.find(customer => customer.wallet) 
+    
+
+
+    console.log(customerWallet);
+    return response.status(200).json({
+        wallets: customerWallet
+    });
 
 
 
-//     return response.status(200).json({
-//         message: "all wallets listed",
-//         walleta: [{
-
-//             walletId: customersDB.wallet,
-//             created_at: customersDB.created_at,
-//             balance: customersDB.balance,
-//             statements: [{
-//                 statementId: customersDB.statements,
-//                 transactionType: customersDB.transactionType,
-//                 description: customersDB.description,
-//                 created_at: customersDB.created_at,
-//             }]
-//         }]
+    /* 
+    const allWallets = walletsDB.map(wallet => {
+        return {
+            accountId: wallet.accountId,
+            wallet: wallet.wallet,
+            balance: wallet.balance,
+            created_at: wallet.created_at,
+        }
+    }); */
+});
 
 
 
-//     })
-// });
+/*     return response.status(200).json({
+        message: "all wallets listed",
+        walleta: [{
+
+            walletId: customersDB.wallet,
+            created_at: customersDB.created_at,
+            balance: customersDB.balance,
+            statements: [{
+                statementId: customersDB.statements,
+                transactionType: customersDB.transactionType,
+                description: customersDB.description,
+                created_at: customersDB.created_at,
+            }]
+        }]
+    });
+ */
+
+
 
 
 
