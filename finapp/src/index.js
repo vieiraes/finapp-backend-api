@@ -158,15 +158,40 @@ app.put("/account/:cpf", verifyIfExistsAccountCPFInParams, (request, response) =
 });
 
 
+
+app.delete("/account/:cpf", verifyIfExistsAccountCPFInParams, (request, response) => {
+    const { customer } = request;
+    const { cpf } = request.params;
+
+    const findUserFromCPF = customersDB.find(customer => customer.cpf === cpf);
+    
+    customersDB.splice(customersDB.indexOf(findUserFromCPF), 1);
+    
+    const objeto ={
+        accountId: findUserFromCPF.accountId,
+        name: findUserFromCPF.name
+    };
+
+
+    return response.status(200).json({
+        message: "Account deleted",
+        account: objeto
+    });
+
+
+})
+
+
+
 //#TODO: melhorar.. ainda nao existe registro no WalletsDB, a ideia é começar a criar um push 
 //pra dentro do walletsDB
 app.get("/wallets", (request, response) => {
-    
+
     const { account } = request;
 
 
-    const customerWallet = customersDB.find(customer => customer.wallet) 
-    
+    const customerWallet = customersDB.find(customer => customer.wallet)
+
 
 
     console.log(customerWallet);
