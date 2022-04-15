@@ -12,30 +12,10 @@ This API was created to allow future entrepreneurs to be guided by the basic sol
 </br>
 
 
-### changelog
-```
-#### versão 0.0.1
+### Link da API
 
--pt-br
-- criação de conta de usuario
-- adicionar transações de cash-in 
-  - valida se usuário existe
-- adicionar transações de cash-out
-  - valida se possui saldo suficiente
-  - valida se usuário existe
-- listar um extrato das transações
-- consultar saldo disponivel
+https://documenter.getpostman.com/view/20418848/Uyr4LfjF
 
-- en-en
-- user account creation
-- add cash-in transactions
-  - validates if user exists
-- add cash-out transactions
-  - validates if you have enough balance
-  - validates if user exists
-- list an extract of transactions
-- check available balance
- ```
 
 ## Modo de execução
 

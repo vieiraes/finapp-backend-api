@@ -145,7 +145,7 @@ app.put("/account/:cpf", verifyIfExistsAccountCPFInParams, (request, response) =
         balance: customerfindByCPF.balance,
 
     };
-
+    //#FIXME: precisa arrumar uma forma de mandar gravar os dados para o banco de dados
 
     return response.status(200).json({
         message: "Account updated",
@@ -160,14 +160,14 @@ app.put("/account/:cpf", verifyIfExistsAccountCPFInParams, (request, response) =
 
 
 app.delete("/account/:cpf", verifyIfExistsAccountCPFInParams, (request, response) => {
-    const { customer } = request;
+    //    const { customer } = request;
     const { cpf } = request.params;
 
     const findUserFromCPF = customersDB.find(customer => customer.cpf === cpf);
-    
+
     customersDB.splice(customersDB.indexOf(findUserFromCPF), 1);
-    
-    const objeto ={
+
+    const objeto = {
         accountId: findUserFromCPF.accountId,
         name: findUserFromCPF.name
     };
@@ -357,7 +357,7 @@ function getBalance(statement) {
 //CRIANDO UMA TRANSAÇÃO DE TIPO DEPOSIT
 app.post("/deposit/:cpf", verifyIfExistsAccountCPFInParams, (request, response) => {
 
-    const { customer } = request;// esta linha esta recuperando o customer que está dentro do middleware declarado
+    const { customer } = request;
     const { amount, description } = request.body;
 
 
